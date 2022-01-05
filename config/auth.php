@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'nhanviens',
+        ],
     ],
 
     /*
@@ -63,6 +67,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'nhanviens' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\nhanvien::class,
         ],
 
         // 'users' => [
@@ -88,6 +96,12 @@ return [
 
     'passwords' => [
         'users' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'nhanviens' => [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
