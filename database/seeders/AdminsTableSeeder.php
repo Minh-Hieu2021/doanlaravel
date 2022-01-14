@@ -18,13 +18,45 @@ class AdminsTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        nhanvien::create([
-            'MaNV' => 'NV1',
-            'LoaiNV' => 'QuanLi',
-            'HoTen' => 'HMH',
-            'email' => '1@12.com',
-            'password' => bcrypt('1'),
-            'Anh' => '1.jpg',
-        ]);
+        nhanvien::create(
+            [
+                'MaNV' => 'NV1',
+                'LoaiNV' => 'QuanLi',
+                'HoTen' => 'Huỳnh Minh Hiếu',
+                'email' => '1@12.com',
+                'password' => bcrypt('1'),
+                'Anh' => '1.jpg',
+            ],
+        );
+        nhanvien::create(
+            [
+                'MaNV' => 'NV2',
+                'LoaiNV' => 'QuanLi',
+                'HoTen' => 'Phạm Đăng Quang',
+                'email' => '124@12.com',
+                'password' => bcrypt('1'),
+                'Anh' => '1.jpg',
+            ]
+        );
+        nhanvien::create(
+            [
+                'MaNV' => 'NV3',
+                'LoaiNV' => 'QuanLi',
+                'HoTen' => 'Phạm Anh KHoa',
+                'email' => '152@12.com',
+                'password' => bcrypt('1'),
+                'Anh' => '1.jpg',
+            ]
+        );
+        nhanvien::create(
+            [
+                'MaNV' => 'NV4',
+                'LoaiNV' => 'QuanLi',
+                'HoTen' => 'Nguyễn Việt Đức',
+                'email' => '111@112.com',
+                'password' => bcrypt('1'),
+                'Anh' => '1.jpg',
+            ]
+        );
     }
 }

@@ -9,7 +9,7 @@
      </div>
      <ul class="app-menu">
        <li>
-         <a class="app-menu__item active" href="index-2.html"
+         <a class="app-menu__item active" href="{{ route('admin.dashboard') }}"
            ><i class="app-menu__icon fa fa-dashboard"></i
            ><span class="app-menu__label">Dashboard</span></a
          >
@@ -48,10 +48,9 @@
          </ul>
        </li>
        <li>
-         <a class="app-menu__item" href="charts.html"
+         <a class="app-menu__item" href="{{ route('admin.nhanvien') }}"
            ><i class="app-menu__icon fa fa-pie-chart"></i
-           ><span class="app-menu__label">Charts</span></a
-         >
+           ><span class="app-menu__label">Nhân viên</span></a>
        </li>
        <li class="treeview">
          <a class="app-menu__item" href="#" data-toggle="treeview"
