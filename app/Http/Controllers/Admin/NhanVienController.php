@@ -80,7 +80,7 @@ class NhanvienController extends Controller
         $nhanvien = nhanvien::findOrFail($id);
         $data = $request->all();
         $data['password'] = Hash::make($request->password);
-        nhanvien::update($data);
+        DB::update('update nhanviens set MaNV = ?, LoaiNV = ?, HoTen = ?, email = ? , password = ?, Anh = ? where id = ?', [$nhanvien->MaNV, $data['LoaiNV'], $data['HoTen'], $data['email'], $data['password'], $data['Anh'], $id]);
         return redirect()->route('admin.nhanvien')->with('success', 'Sửa thành công!');
     }
 

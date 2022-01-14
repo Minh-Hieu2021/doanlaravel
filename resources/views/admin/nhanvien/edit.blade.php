@@ -4,7 +4,8 @@
 <div class="container mt-3">
     <div class="row">
       <div class="col-12 ">
-        <form action="{{route('admin.nhanvien.update',$nhanvien->id)}}" method="put">
+        <form action="{{route('admin.nhanvien.update',$nhanvien->id)}}" method="post">
+            @method('PUT')
             @csrf
           <div class="form-group ">
             <label class="text-uppercase font-weight-bold" for="LoaiNV">Loại nhân viên:</label>
@@ -12,8 +13,8 @@
               value="{{$nhanvien->LoaiNV}}">
           </div>
           <div class="form-group ">
-            <label class="text-uppercase font-weight-bold" for="name">Tên nhân viên:</label>
-            <input type="text" class="form-control rounded-0" id="name" placeholder="Name" name="name"
+            <label class="text-uppercase font-weight-bold" for="HoTen">Tên nhân viên:</label>
+            <input type="text" class="form-control rounded-0" id="HoTen" placeholder="HoTen" name="HoTen"
               value="{{$nhanvien->HoTen}}">
           </div>
           <div class="form-group ">
@@ -23,7 +24,7 @@
           </div>
           <div class="form-group ">
             <label class="text-uppercase font-weight-bold" for="email">Password:</label>
-            <input type="password" class="form-control rounded-0" id="Password" placeholder="Password" name="Password"
+            <input type="password" class="form-control rounded-0" id="Password" placeholder="Password" name="password"
               value="">
           </div>
           <div class="form-group ">

@@ -1,5 +1,5 @@
 @extends('admin.app')
-@section('title') Chỉnh sửa nhân viên @endsection
+@section('title') Thêm nhân viên @endsection
 @section('content')
 <div class="container mt-3">
     <div class="d-flex flex-row">
