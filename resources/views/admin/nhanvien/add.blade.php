@@ -2,9 +2,12 @@
 @section('title') Thêm nhân viên @endsection
 @section('content')
 <div class="container mt-3">
+    @if($errors->first('Anh')!=null || $errors->first('email')!=null || $errors->first('password')!=null ||$errors->first('LoaiNV')!=null || $errors->first('HoTen')!=null || $errors->first('MaNV')!=null)
+    <span style="color:red">Bạn phải nhập đầy đủ tất cả thông tin</span>
+    @endif
     <div class="d-flex flex-row">
       <div class="col-12 px-0">
-        <form action="{{route('admin.nhanvien.store')}}" method="post">
+        <form action="{{route('admin.nhanvien.store')}}" method="post" enctype="multipart/form-data">
             @csrf
           <div class="form-group ">
             <label class="text-uppercase font-weight-bold" for="MaNV">Mã nhân viên:</label>
@@ -28,7 +31,7 @@
           </div>
           <div class="form-group ">
             <label class="text-uppercase font-weight-bold" for="Anh">Ảnh nhân viên:</label>
-            <input type="text" class="form-control rounded-0" id="Anh" placeholder="Anh" name="Anh">
+            <input type="file" class="form-control rounded-0" id="Anh" placeholder="Anh" name="Anh">
           </div>
           <div class="form-group ">
             <button type="submit" class="btn btn-danger text-uppercase rounded-0 font-weight-bold">

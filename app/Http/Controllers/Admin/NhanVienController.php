@@ -7,6 +7,7 @@ use App\Models\nhanvien;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
 
 class NhanvienController extends Controller
 {
@@ -41,7 +42,20 @@ class NhanvienController extends Controller
     {
         $data = $request->all();
         $data['password'] = Hash::make($request->password);
-        nhanvien::create($data);
+        $Anh = $data['MaNV'] . '.jpg';
+        $this->validate($request, [
+            'Anh' => 'required',
+            'password' => 'required',
+            'email' => 'required',
+            'MaNV' => 'required',
+            'LoaiNV' => 'required',
+            'HoTen' => 'required',
+        ]);
+        $image = $request->file('Anh');
+        $imagePath = $image->move('backend/img/AnhNhanVien', $Anh);
+        DB::insert('insert into nhanviens (MaNV, LoaiNV, HoTen, email, password, Anh) values (?, ?, ?, ?, ?, ?)', [$data['MaNV'], $data['LoaiNV'], $data['HoTen'], $data['email'], $data['password'], $imagePath]);
+
+
         return redirect()->route('admin.nhanvien')->with('success', 'Thêm thành công!');
     }
 
@@ -78,7 +92,22 @@ class NhanvienController extends Controller
     public function update(Request $request, $id)
     {
         $nhanvien = nhanvien::findOrFail($id);
+        $this->validate($request, [
+            'password' => 'required',
+            'email' => 'required',
+            'LoaiNV' => 'required',
+            'HoTen' => 'required',
+        ]);
         $data = $request->all();
+        $data['MaNV'] = $nhanvien->MaNV;
+        $Anh = $data['MaNV'] . '.jpg';
+        if (!$request->hasFile('Anh')) {
+            $data['Anh'] = $nhanvien->Anh;
+        } else {
+            File::delete($nhanvien->Anh);
+            $image = $request->file('Anh');
+            $data['Anh'] = $image->move('backend/img/AnhNhanVien', $Anh);
+        }
         $data['password'] = Hash::make($request->password);
         DB::update('update nhanviens set MaNV = ?, LoaiNV = ?, HoTen = ?, email = ? , password = ?, Anh = ? where id = ?', [$nhanvien->MaNV, $data['LoaiNV'], $data['HoTen'], $data['email'], $data['password'], $data['Anh'], $id]);
         return redirect()->route('admin.nhanvien')->with('success', 'Sửa thành công!');
@@ -93,6 +122,7 @@ class NhanvienController extends Controller
     public function destroy($id)
     {
         $nhanvien = nhanvien::findOrFail($id);
+        File::delete($nhanvien->Anh);
         $nhanvien->delete();
         return redirect()->route('admin.nhanvien')->with('success', 'Xóa thành công!');
     }

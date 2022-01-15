@@ -15,7 +15,7 @@
             <th>Loại nhân viên</th>
             <th>Email</th>
             <th>Ảnh</th>
-            <th></th>
+            <th>Công cụ</th>
         </tr>
         @foreach ($data as $item)
         <tr>
@@ -23,7 +23,7 @@
             <td>{{ $item->HoTen }}</td>
             <td>{{ $item->LoaiNV }}</td>
             <td>{{ $item->email }}</td>
-            <td>{{ $item->Anh }}</td>
+            <td style="padding:5px"><img style="width:100px" src="{{ asset($item->Anh) }}" alt=""></td>
             <td style="padding:0px">
                 <a href="{{ route('admin.nhanvien.edit',$item->id) }}"><img style="width:30px" src="{{ asset("backend/icon/edit.png") }}"></img></a>
                 <a href="{{ route('admin.nhanvien.delete',$item->id) }}"><img style="width:45px" src="{{ asset("backend/icon/remove.png") }}"></img></i></a>
