@@ -3,7 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\NhanvienController;
+<<<<<<< Updated upstream
 use App\Http\Controllers\Admin\SanPhamController;
+=======
+use App\Http\Controllers\Admin\HoaDonNhapController;
+use App\Http\Controllers\Admin\ChiTietHoaDonNhapController;
+>>>>>>> Stashed changes
 
 Route::group(['prefix' => '/'], function () {
     Route::get('login', [Admin\LoginController::class, 'showLoginForm'])->name('admin.login');
@@ -21,6 +26,7 @@ Route::group(['prefix' => '/'], function () {
             Route::put('/update/{id}', [NhanvienController::class, 'update'])->name('admin.nhanvien.update');
             Route::get('/delete/{id}', [NhanvienController::class, 'destroy'])->name('admin.nhanvien.delete');
         });
+<<<<<<< Updated upstream
         Route::prefix('/sanpham')->group(function () {
             Route::get('/', [SanphamController::class, 'index'])->name('admin.sanpham');
             Route::get('/create', [SanphamController::class, 'create'])->name('admin.sanpham.add');
@@ -28,6 +34,21 @@ Route::group(['prefix' => '/'], function () {
             Route::get('/update/{id}', [SanphamController::class, 'edit'])->name('admin.sanpham.edit');
             Route::put('/update/{id}', [SanphamController::class, 'update'])->name('admin.sanpham.update');
             Route::get('/delete/{id}', [SanphamController::class, 'destroy'])->name('admin.sanpham.delete');
+=======
+
+        Route::prefix('/hoadonnhap')->group(function () { //Thêm mới
+            Route::get('/', [HoaDonNhapController::class, 'index'])->name('admin.hoadonnhap');
+            Route::get('/create', [HoaDonNhapController::class, 'create'])->name('admin.hoadonnhap.add');
+            Route::post('/create', [HoaDonNhapController::class, 'store'])->name('admin.hoadonnhap.store');
+            Route::get('/delete/{id}', [HoaDonNhapController::class, 'destroy'])->name('admin.hoadonnhap.delete');
+        });
+
+        Route::prefix('/chitiethoadonnhap')->group(function () { //Thêm mới
+            Route::get('/', [ChiTietHoaDonNhapController::class, 'index'])->name('admin.chitiethoadonnhap');
+            Route::get('/create', [ChiTietHoaDonNhapController::class, 'create'])->name('admin.chitiethoadonnhap.add');
+            Route::post('/create', [ChiTietHoaDonNhapController::class, 'store'])->name('admin.chitiethoadonnhap.store');
+            Route::get('/delete/{id}', [ChiTietHoaDonNhapController::class, 'destroy'])->name('admin.chitiethoadonnhap.delete');
+>>>>>>> Stashed changes
         });
     });
 });
