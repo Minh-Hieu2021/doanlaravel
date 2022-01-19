@@ -5,7 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class khachhang extends Model
+class khachhang extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
+    protected $fillable = [
+        'MaKH',
+        'TenKH',
+        'Dchi',
+        'SDT',
+        'MatKhau',
+        
+    ];
+    protected $table = 'khachhangs';
 }

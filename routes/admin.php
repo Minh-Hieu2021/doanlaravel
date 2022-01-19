@@ -48,6 +48,15 @@ Route::group(['prefix' => '/'], function () {
             Route::get('/create', [ChiTietHoaDonNhapController::class, 'create'])->name('admin.chitiethoadonnhap.add');
             Route::post('/create', [ChiTietHoaDonNhapController::class, 'store'])->name('admin.chitiethoadonnhap.store');
             Route::get('/delete/{id}', [ChiTietHoaDonNhapController::class, 'destroy'])->name('admin.chitiethoadonnhap.delete');
+            <<<<<<< Updated upstream
+        Route::prefix('/khachhang')->group(function () {
+            Route::get('/', [khachhangController::class, 'index'])->name('admin.khachhang');
+            Route::get('/create', [khachhangController::class, 'create'])->name('admin.khachhang.add');
+            Route::post('/create', [khachhangController::class, 'store'])->name('admin.khachhang.store');
+            Route::get('/update/{id}', [khachhangController::class, 'edit'])->name('admin.khachhang.edit');
+            Route::put('/update/{id}', [khachhangController::class, 'update'])->name('admin.khachhang.update');
+            Route::get('/delete/{id}', [khachhangController::class, 'destroy'])->name('admin.khachhang.delete');
+=======
 >>>>>>> Stashed changes
         });
     });
