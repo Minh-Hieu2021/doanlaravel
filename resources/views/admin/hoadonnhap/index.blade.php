@@ -23,6 +23,7 @@
             <td>{{ $item->NgNhap }}</td>
             <td>{{ $item->TongTien }}</td>
             <td style="padding:0px">
+                <a href="{{ route('admin.hoadonnhap.edit',$item->id) }}"><img style="width:30px" src="{{ asset("backend/icon/edit.png") }}"></img></a>
                 <a href="{{ route('admin.hoadonnhap.delete',$item->id) }}"><img style="width:45px" src="{{ asset("backend/icon/remove.png") }}"></img></i></a>
             </td>
         </tr>

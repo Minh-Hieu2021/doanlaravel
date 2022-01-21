@@ -53,13 +53,11 @@
            ><span class="app-menu__label">Nhân viên</span></a>
        </li>
        <li>
-<<<<<<< Updated upstream
          <a class="app-menu__item" href="{{ route('admin.sanpham') }}"
-           ><i class="app-menu__icon fab fa-product-hunt"></i>
+           ><i class="app-menu__icon fa fa-pie-chart"></i>
            <span class="app-menu__label">Sản Phẩm</span></a>
        </li>
-=======
-        <a class="app-menu__item" href="{{ route('admin.hoadonnhap') }}"
+       <a class="app-menu__item" href="{{ route('admin.hoadonnhap') }}"
           ><i class="app-menu__icon fa fa-pie-chart"></i
           ><span class="app-menu__label">Hoá đơn nhập</span></a>
       </li>
@@ -68,8 +66,6 @@
           ><i class="app-menu__icon fa fa-pie-chart"></i
           ><span class="app-menu__label">Chi tiết hoá đơn nhập</span></a>
       </li>
-
->>>>>>> Stashed changes
        <li class="treeview">
          <a class="app-menu__item" href="#" data-toggle="treeview"
            ><i class="app-menu__icon fa fa-edit"></i

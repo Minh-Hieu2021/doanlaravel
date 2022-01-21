@@ -42,8 +42,8 @@ class HoaDonNhapController extends Controller
     {
         $data = $request->all();
         $this->validate($request, [
-            'MaHD' => 'required',
             'NhanVien_id' => 'required',
+            'MaHD' => 'required',
             'NgNhap' => 'required',
             'TongTien' => 'required',
         ]);
@@ -62,6 +62,39 @@ class HoaDonNhapController extends Controller
     public function show($id)
     {
         //
+    }
+
+     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $hoadonnhap = hoadonnhap::findOrFail($id);
+        return view('admin.hoadonnhap.edit', compact('hoadonnhap'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $hoadonnhap = hoadonnhap::findOrFail($id);
+        $this->validate($request, [
+            'NhanVien_id' => 'required',
+            'NgNhap' => 'required',
+            'TongTien' => 'required',
+        ]);
+        $data = $request->all();
+        $data['MaHD'] = $hoadonnhap->MaHD;
+        DB::update('update hoadonnhaps set NhanVien_id = ?, MaHD = ?, NgNhap = ? , TongTien = ?, where id = ?', [$data['NhanVien_id'], $hoadonnhap->MaHD, $data['NgNhap'], $data['TongTien'], $id]);
+        return redirect()->route('admin.hoadonnhap')->with('success', 'Sửa thành công!');
     }
 
     /**

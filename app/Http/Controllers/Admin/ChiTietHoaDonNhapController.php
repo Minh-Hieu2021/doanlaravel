@@ -44,10 +44,11 @@ class ChiTietHoaDonNhapController extends Controller
         $this->validate($request, [
             'HoaDonNhap_id' => 'required',
             'SanPham_id' => 'required',
+            'MaSanPham' => 'required',
             'SL' => 'required',
-            'DonGia' => 'required',
+            'GiaBan' => 'required',
         ]);
-        DB::insert('insert into chitiethoadonnhaps (HoaDonNhap_id, SanPham_id, SL, DonGia) values (?, ?, ?, ?, ?)', [$data['HoaDonNhap_id'], $data['SanPham_id'], $data['SL'], $data['DonGia']]);
+        DB::insert('insert into chitiethoadonnhaps (HoaDonNhap_id, SanPham_id, MaSanPham, SL, GiaBan) values (?, ?, ?, ?, ?)', [$data['HoaDonNhap_id'], $data['SanPham_id'], $data['MaSanPham'], $data['SL'], $data['GiaBan']]);
 
 
         return redirect()->route('admin.chitiethoadonnhap')->with('success', 'Thêm thành công!');
@@ -62,6 +63,40 @@ class ChiTietHoaDonNhapController extends Controller
     public function show($id)
     {
         //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $chitiethoadonnhap = chitiethoadonnhap::findOrFail($id);
+        return view('admin.chitiethoadonnhap.edit', compact('chitiethoadonnhap'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $chitiethoadonnhap = chitiethoadonnhap::findOrFail($id);
+        $this->validate($request, [
+            'MaSanPham' => 'required',
+            'SL' => 'required',
+            'GiaBan' => 'required',
+        ]);
+        $data = $request->all();
+        $data['HoaDonNhap_id'] = $chitiethoadonnhap->HoaDonNhap_id;
+        $data['SanPham_id'] = $chitiethoadonnhap->SanPham_id;
+        DB::update('update chitiethoadonnhaps set HoaDonNhap_id = ?, SanPham_id = ?, MaSanPham = ? , SL = ?, GiaBan = ?, where id = ?', [$chitiethoadonnhap->HoaDonNhap_id, $chitiethoadonnhap->SanPham_id, $data['MaSanPham'], $data['SL'], $data['GiaBan'], $id]);
+        return redirect()->route('admin.chitiethoadonnhap')->with('success', 'Sửa thành công!');
     }
 
     /**

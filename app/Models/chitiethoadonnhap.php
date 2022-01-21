@@ -13,8 +13,9 @@ class chitiethoadonnhap extends Authenticatable
     protected $fillable = [
         'HoaDonNhap_id',
         'SanPham_id',
+        'MaSanPham',
         'SL',
-        'DonGia',
+        'GiaBan',
     ];
     protected $table = 'chitiethoadonnhaps';
 }
