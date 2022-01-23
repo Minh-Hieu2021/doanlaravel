@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\nhanvien;
+use App\Models\khachhang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 
-class NhanvienController extends Controller
+class khachhangController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,14 +42,14 @@ class NhanvienController extends Controller
     {
         $data = $request->all();
         $this->validate($request, [
-            
+
             'MaKH' => 'required',
             'TenKH' => 'required',
-            'Dchi' => 'required',
+            'DChi' => 'required',
             'SDT' => 'required',
             'MatKhau' => 'required',
         ]);
-        DB::insert('insert into khachhangs (MaKH, TenKH, Dchi, SDT, MatKhau ) values (?, ?, ?, ?, ?, ?)', [$data['MaKH'], $data['TenKH'], $data['Dchi'], $data['SDT'], $data['MatKhau']]);
+        DB::insert('insert into khachhangs (MaKH, TenKH, DChi, SDT, MatKhau ) values (?, ?, ?, ?, ?)', [$data['MaKH'], $data['TenKH'], $data['DChi'], $data['SDT'], $data['MatKhau']]);
 
 
         return redirect()->route('admin.khachhang')->with('success', 'Thêm thành công!');
@@ -96,10 +96,9 @@ class NhanvienController extends Controller
             'MatKhau' => 'required',
         ]);
         $data = $request->all();
-        
+
         DB::update('update khachhangs set MaNV = ?, LoaiNV = ?, HoTen = ?, email = ? , password = ?, Anh = ? where id = ?', [$nhanvien->MaNV, $data['LoaiNV'], $data['HoTen'], $data['email'], $data['password'], $data['Anh'], $id]);
         return redirect()->route('admin.khachhang')->with('success', 'Sửa thành công!');
-        
     }
 
     /**

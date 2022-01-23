@@ -18,8 +18,8 @@
             <input type="text" class="form-control rounded-0" id="TenKH" placeholder="TenKH" name="TenKH">
           </div>
           <div class="form-group ">
-            <label class="text-uppercase font-weight-bold" for="Dchi">địa chỉ :</label>
-            <input type="text" class="form-control rounded-0" id="Dchi" placeholder="Dchi" name="Dchi">
+            <label class="text-uppercase font-weight-bold" for="DChi">địa chỉ :</label>
+            <input type="text" class="form-control rounded-0" id="DChi" placeholder="DChi" name="DChi">
           </div>
           <div class="form-group ">
             <label class="text-uppercase font-weight-bold" for="SDT"> số điện thoại :</label>
@@ -32,7 +32,7 @@
 
           <div class="form-group ">
             <button type="submit" class="btn btn-danger text-uppercase rounded-0 font-weight-bold">
-              Thêm khách hàng 
+              Thêm khách hàng
             </button>
           </div>
         </form>

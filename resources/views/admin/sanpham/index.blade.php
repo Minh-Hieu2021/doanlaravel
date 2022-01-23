@@ -10,13 +10,13 @@
     <a style="text-decoration:none;font-size:20px" href="{{ route('admin.sanpham.add') }}">Thêm sản phẩm</a>
     <table class="table table-striped">
         <tr>
-            <th>Mã nhân viên</th>
+            <th>Mã sản phẩm</th>
             <th>Tên Sản Phẩm</th>
             <th>Giá Bán</th>
             <th>SLTK</th>
             <th>Mô Tả</th>
             <th>Ảnh</th>
-
+            <th>Công cụ</th>
         </tr>
         @foreach ($data as $item)
         <tr>

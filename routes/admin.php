@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\NhanvienController;
 use App\Http\Controllers\Admin\SanPhamController;
 use App\Http\Controllers\Admin\HoaDonNhapController;
 use App\Http\Controllers\Admin\ChiTietHoaDonNhapController;
+use App\Http\Controllers\Admin\khachhangController;
 
 Route::group(['prefix' => '/'], function () {
     Route::get('login', [Admin\LoginController::class, 'showLoginForm'])->name('admin.login');
@@ -57,8 +58,18 @@ Route::group(['prefix' => '/'], function () {
             Route::put('/update/{id}', [khachhangController::class, 'update'])->name('admin.khachhang.update');
             Route::get('/delete/{id}', [khachhangController::class, 'destroy'])->name('admin.khachhang.delete');
         });
+        Route::prefix('/hoadonnhap')->group(function () { //Thêm mới
+            Route::get('/', [HoaDonNhapController::class, 'index'])->name('admin.hoadonnhap');
+            Route::get('/create', [HoaDonNhapController::class, 'create'])->name('admin.hoadonnhap.add');
+            Route::post('/create', [HoaDonNhapController::class, 'store'])->name('admin.hoadonnhap.store');
+            Route::get('/delete/{id}', [HoaDonNhapController::class, 'destroy'])->name('admin.hoadonnhap.delete');
+        });
+
+        Route::prefix('/chitiethoadonnhap')->group(function () { //Thêm mới
+            Route::get('/', [ChiTietHoaDonNhapController::class, 'index'])->name('admin.chitiethoadonnhap');
+            Route::get('/create', [ChiTietHoaDonNhapController::class, 'create'])->name('admin.chitiethoadonnhap.add');
+            Route::post('/create', [ChiTietHoaDonNhapController::class, 'store'])->name('admin.chitiethoadonnhap.store');
+            Route::get('/delete/{id}', [ChiTietHoaDonNhapController::class, 'destroy'])->name('admin.chitiethoadonnhap.delete');
+        });
     });
 });
-
-
-

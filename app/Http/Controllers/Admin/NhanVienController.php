@@ -18,7 +18,7 @@ class NhanvienController extends Controller
      */
     public function index()
     {
-        $data = DB::table('nhanviens')->get();
+        $data = DB::table('nhanviens')->paginate(2);
         return view('admin.nhanvien.index', ['data' => $data]);
     }
 

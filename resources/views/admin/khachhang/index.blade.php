@@ -7,15 +7,15 @@
         {{ session('success') }}
     </div>
 @endif
-    <a style="text-decoration:none;font-size:20px" href="{{ route('admin.khachhang.add') }}">thêm khách hàng </a>
+    <a style="text-decoration:none;font-size:20px" href="{{ route('admin.khachhang.add') }}">Thêm khách hàng </a>
     <table class="table table-striped">
         <tr>
-            <th>mã khách hàng </th>
-            <th>tên khách hàng </th>
-            <th>địa chỉ</th>
+            <th>Mã khách hàng </th>
+            <th>Tên khách hàng </th>
+            <th>Địa chỉ</th>
             <th>Số điện thoại</th>
-            <th>mật khẩu</th>
-            
+            <th>Mật khẩu</th>
+
         </tr>
         @foreach ($data as $item)
         <tr>
@@ -24,7 +24,7 @@
             <td>{{ $item->Dchi }}</td>
             <td>{{ $item->SDT }}</td>
             <td>{{ $item->MatKhau }}</td>
-            
+
         </tr>
         @endforeach
 
