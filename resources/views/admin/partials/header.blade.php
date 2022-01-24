@@ -1,6 +1,6 @@
     <!-- Navbar-->
     <header class="app-header">
-        <a class="app-header__logo" href="index-2.html">{{ config('app.name') }}</a>
+        <a class="app-header__logo" href="{{ route('admin.dashboard') }}">Nhóm 7</a>
         <!-- Sidebar toggle button--><a
           class="app-sidebar__toggle"
           href="#"
@@ -147,12 +147,7 @@
             ></a>
             <ul class="dropdown-menu settings-menu dropdown-menu-right">
               <li>
-                <a class="dropdown-item" href="page-user.html"
-                  ><i class="fa fa-cog fa-lg"></i> Settings</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item" href="page-user.html"
+                <a class="dropdown-item" href="{{ route('admin.profile') }}"
                   ><i class="fa fa-user fa-lg"></i> Profile</a
                 >
               </li>

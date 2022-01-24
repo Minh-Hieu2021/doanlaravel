@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Cookie;
 
 class SanPhamController extends Controller
 {
@@ -18,8 +19,10 @@ class SanPhamController extends Controller
      */
     public function index()
     {
+        $email = Cookie::get('email');
+        $value = DB::select('select * from nhanviens where email = ?', [$email]);
         $data = DB::table('sanphams')->get();
-        return view('admin.sanpham.index', ['data' => $data]);
+        return view('admin.sanpham.index', ['data' => $data, 'value' => $value]);
     }
 
     /**
@@ -92,7 +95,7 @@ class SanPhamController extends Controller
     {
         $sanpham = sanpham::findOrFail($id);
         $this->validate($request, [
-            'MaSanPham' =>'require',
+            'MaSanPham' => 'require',
             'TenSanPham' => 'required',
             'GiaBan' => 'required',
             'SLTK' => 'required',

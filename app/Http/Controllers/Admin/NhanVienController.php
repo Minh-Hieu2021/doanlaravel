@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Cookie;
 
 class NhanvienController extends Controller
 {
@@ -18,8 +19,10 @@ class NhanvienController extends Controller
      */
     public function index()
     {
+        $email = Cookie::get('email');
+        $value = DB::select('select * from nhanviens where email = ?', [$email]);
         $data = DB::table('nhanviens')->paginate(2);
-        return view('admin.nhanvien.index', ['data' => $data]);
+        return view('admin.nhanvien.index', ['data' => $data, 'value' => $value]);
     }
 
     /**

@@ -2,16 +2,6 @@
 @section('title') Dashboard @endsection
 @section('content')
 <main class="app-content">
-    <div class="app-title">
-      <div>
-        <h1><i class="fa fa-dashboard"></i> Dashboard</h1>
-        <p>A free and open source Bootstrap 4 admin template</p>
-      </div>
-      <ul class="app-breadcrumb breadcrumb">
-        <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-      </ul>
-    </div>
     <div class="row">
       <div class="col-md-6 col-lg-3">
         <div class="widget-small primary coloured-icon">
@@ -50,6 +40,61 @@
         </div>
       </div>
     </div>
+    <div>
+        <h5>Danh sách hóa đơn trong tuần</h5><br>
+        <table class="table table-striped">
+            <tr>
+                <th>Mã hóa đơn</th>
+                <th>Nhân viên</th>
+                <th>Khách hàng</th>
+                <th>Ngày lập</th>
+                <th>Tổng tiền</th>
+                <th>Trạng thái</th>
+                <th>SDT</th>
+                <th>Địa chỉ</th>
+            </tr>
+            @foreach ($listhd as $item)
+            <tr>
+                <td>{{ $item->MaHD }}</td>
+                <td>{{ $item->HoTen }}</td>
+                <td>{{ $item->TenKH }}</td>
+                <td>{{ $item->NgLap }}</td>
+                <td>{{ $item->TongTien }} VND</td>
+                @if ($item->TrangThai == 1)
+                <td><button class="btn btn-success">True</button></td>
+                @else
+                <td><button class="btn btn-danger">False</button></td>
+                @endif
+                <td>{{ $item->SDT }}</td>
+                <td>{{ $item->DChi }}</td>
+            </tr>
+            @endforeach
+
+        </table>
+    </div><br>
+    <div>
+        <h5>Tổng tiền khách hàng đã chi của các khách hàng mua hàng trong tuần</h5><br>
+        <table class="table table-striped">
+            <tr>
+                <th>Mã khách hàng</th>
+                <th>Tên khách hàng</th>
+                <th>Số tiền đã chi</th>
+            </tr>
+            @foreach ($listtienkhchi as $item)
+            <tr>
+                <td>{{ $item->MaKH }}</td>
+                <td>{{ $item->TenKH }}</td>
+                <td>{{ $item->Tiendachi }} VND</td>
+            </tr>
+            @endforeach
+
+        </table>
+    </div><br>
+    <div>
+        <h5>Doanh thu tuần hiện tại: @foreach ($doanhthu as  $item)
+            {{ $item->dt }}
+        @endforeach VND</h5><br>
+    </div><br>
   </main>
 
 @endsection

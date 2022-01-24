@@ -7,15 +7,15 @@ use App\Http\Controllers\Admin\SanPhamController;
 use App\Http\Controllers\Admin\HoaDonNhapController;
 use App\Http\Controllers\Admin\ChiTietHoaDonNhapController;
 use App\Http\Controllers\Admin\khachhangController;
+use App\Http\Controllers\Admin\AdminController;
 
 Route::group(['prefix' => '/'], function () {
     Route::get('login', [Admin\LoginController::class, 'showLoginForm'])->name('admin.login');
     Route::post('login', [Admin\LoginController::class, 'login'])->name('admin.login.post');
     Route::get('logout', [Admin\LoginController::class, 'logout'])->name('admin.logout');
     Route::group(['middleware' => ['auth:admin']], function () {
-        Route::get('/', function () {
-            return view('admin.dashboard.index');
-        })->name('admin.dashboard');
+        Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+        Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
         Route::prefix('/nhanvien')->group(function () {
             Route::get('/', [NhanvienController::class, 'index'])->name('admin.nhanvien');
             Route::get('/create', [NhanvienController::class, 'create'])->name('admin.nhanvien.add');
@@ -70,6 +70,13 @@ Route::group(['prefix' => '/'], function () {
             Route::get('/create', [ChiTietHoaDonNhapController::class, 'create'])->name('admin.chitiethoadonnhap.add');
             Route::post('/create', [ChiTietHoaDonNhapController::class, 'store'])->name('admin.chitiethoadonnhap.store');
             Route::get('/delete/{id}', [ChiTietHoaDonNhapController::class, 'destroy'])->name('admin.chitiethoadonnhap.delete');
+        });
+        Route::prefix('/thongkechitiet')->group(function () {
+            Route::get('/doanhthu', [AdminController::class, 'doanhthu'])->name('admin.thongkechitiet.doanhthu');
+            Route::get('/doanhso', [AdminController::class, 'doanhso'])->name('admin.thongkechitiet.doanhso');
+            Route::get('/topsanpham', [AdminController::class, 'topsanpham'])->name('admin.thongkechitiet.topsanpham');
+            Route::get('/tongtienkhachchi', [AdminController::class, 'tongtienkhachchi'])->name('admin.thongkechitiet.tongtienkhachchi');
+            Route::get('/danhsachhoadontheokhoangthoigian', [AdminController::class, 'danhsachhoadontheokhoangthoigian'])->name('admin.thongkechitiet.danhsachhoadontheokhoangthoigian');
         });
     });
 });

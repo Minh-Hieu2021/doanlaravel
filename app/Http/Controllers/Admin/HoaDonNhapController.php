@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Cookie;
 
 class HoaDonNhapController extends Controller
 {
@@ -18,8 +19,10 @@ class HoaDonNhapController extends Controller
      */
     public function index()
     {
+        $email = Cookie::get('email');
+        $value = DB::select('select * from nhanviens where email = ?', [$email]);
         $data = DB::table('hoadonnhaps')->get();
-        return view('admin.hoadonnhap.index', ['data' => $data]);
+        return view('admin.hoadonnhap.index', ['data' => $data, 'value' => $value]);
     }
 
     /**
@@ -64,7 +67,7 @@ class HoaDonNhapController extends Controller
         //
     }
 
-     /**
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

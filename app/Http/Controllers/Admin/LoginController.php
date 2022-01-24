@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cookie;
 
 class LoginController extends Controller
 {
@@ -37,6 +38,7 @@ class LoginController extends Controller
     }
     public function index()
     {
+
         return view('admin.dashboard.index');
     }
     public function login(Request $request)
@@ -46,6 +48,7 @@ class LoginController extends Controller
             'password' => $request->password
 
         ], $request->get('remember'))) {
+            Cookie::queue('email', $request->email, 86400);
             return redirect()->intended(route('admin.dashboard'));
         }
         return back()->withInput($request->only('email', 'remember'));
