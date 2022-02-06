@@ -95,7 +95,7 @@ class SanPhamController extends Controller
     {
         $sanpham = sanpham::findOrFail($id);
         $this->validate($request, [
-            'MaSanPham' => 'require',
+            'MaSanPham' => 'required',
             'TenSanPham' => 'required',
             'GiaBan' => 'required',
             'SLTK' => 'required',
