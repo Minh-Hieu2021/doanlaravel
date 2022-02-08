@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('user.home.index');
 });
+Route::get('/cart', [HomeController::class, 'cart'])->name('cart');
 Route::get('/productdetail', function () {
     return view('user.home.productdetail');
 });
