@@ -890,6 +890,11 @@ h2.title {
     opacity: ;
 }
 
+.single-products:hover .product-overlay {
+    display: block;
+    height: 100%;
+}
+
 .product-overlay .overlay-content {
     bottom: 0;
     position: absolute;
@@ -1532,7 +1537,7 @@ h2.title {
 }
 
 .breadcrumbs .breadcrumb>li+li:before {
-    content: " ";
+    content: " ";
 }
 
 #cart_items .cart_info {
