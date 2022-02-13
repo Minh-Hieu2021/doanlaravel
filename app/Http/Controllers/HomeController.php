@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\sanpham;
 
 class HomeController extends Controller
 {
@@ -36,4 +37,12 @@ class HomeController extends Controller
         WHERE giohangs.KhachHang_id = 2');
         return view('user.cart.index', ['data' => $data]);
     }
+    public function productdetail($sp)
+    {
+        if(sanpham::where('MaSanPham',$sp)->exists()) {
+            $data = sanpham::where('MaSanPham',$sp)->get();
+            return view('user.home.productdetail', compact('data'));
+        }
+    }
+
 }
