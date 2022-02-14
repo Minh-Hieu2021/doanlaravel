@@ -42,7 +42,7 @@ class AdminController extends Controller
             $doanhthu  = DB::select('select sum(hoadonbans.TongTien) as dt from hoadonbans where DATE(NgLap) >= ? and DATE(NgLap) <= ?', [$request->datedtstart, $request->datedtend]);
         }
 
-        return view('admin.thongkechitiet.doanhthu', ['doanhthu' => $doanhthu, 'value' => $value]('value'));
+        return view('admin.thongkechitiet.doanhthu', ['doanhthu' => $doanhthu, 'value' => $value]);
     }
     public function doanhso(Request $request)
     {
