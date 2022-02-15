@@ -20,7 +20,7 @@
                                     <div class="productinfo text-center">
                                         <img src="{{ $sp->Anh }}" alt="" />
                                         <h2>{{ $sp->GiaBan }} VND</h2>
-                                        <a href={{ route('productdetail',$sp->MaSanPham) }}>{{ $sp->TenSanPham }}</a>
+                                        <p>{{ $sp->TenSanPham }}</p>
                                         <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </div>
                                     <div class="product-overlay">

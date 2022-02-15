@@ -16,7 +16,6 @@ class nhanvien extends Authenticatable
         'HoTen',
         'email',
         'password',
-        'MaNV',
         'Anh',
     ];
     protected $hidden = [
