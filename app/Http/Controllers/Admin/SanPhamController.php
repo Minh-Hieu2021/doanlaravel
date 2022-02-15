@@ -113,7 +113,7 @@ class SanPhamController extends Controller
             $image = $request->file('Anh');
             $data['Anh'] = $image->move('backend/img/AnhSanpham', $Anh);
         }
-        DB::update('update sanphams set MaSanPham = ?, TenSanPham = ?, GiaBan = ?, SLTK = ? , Anh = ?,MoTa = ? where id = ?', [$data['MaSanPham'], $data['TenSanPham'], $data['GiaBan'], $data['SLTK'], $data['Anh'], $data['MoTa'], $id]);
+        DB::update('update sanphams set MaSanPham = ?, TenSanPham = ?, GiaBan = ?, SLTK = ? ,MoTa = ?, Anh = ? where id = ?', [$data['MaSanPham'], $data['TenSanPham'], $data['GiaBan'], $data['SLTK'], $data['MoTa'],$data['Anh'], $id]);
         return redirect()->route('admin.sanpham')->with('success', 'Sửa thành công!');
     }
 
