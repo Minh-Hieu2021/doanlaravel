@@ -16,14 +16,14 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
     return view('user.home.index');
-});
+})->name('home');
 Route::get('/cart', [HomeController::class, 'cart'])->name('cart');
 Route::get('/productdetail', function () {
     return view('user.home.productdetail');
 });
 Route::get('/product', function () {
     return view('user.home.product');
-});
+})->name('product');
 Route::get('/product/{id}', [HomeController::class, 'productdetail'])->name('productdetail');
 
 Auth::routes();

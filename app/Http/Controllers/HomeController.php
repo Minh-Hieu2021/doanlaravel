@@ -31,11 +31,12 @@ class HomeController extends Controller
     public function cart()
     {
         // $this->middleware('auth');
-        $data = DB::select('select sanphams.Anh as Anh, sanphams.TenSanPham, sanphams.GiaBan, chitietgiohangs.SL,  sanphams.GiaBan*chitietgiohangs.SL as Total
-        from giohangs
-        inner JOIN chitietgiohangs on giohangs.id = chitietgiohangs.GioHang_id
-        INNER JOIN sanphams on chitietgiohangs.SanPham_id = sanphams.id
-        WHERE giohangs.KhachHang_id = 2');
+        $total = 0;
+        $data = DB::table('giohangs')
+        ->join('chitietgiohangs','giohangs.id','=','chitietgiohangs.GioHang_id')
+        ->join('sanphams','chitietgiohangs.SanPham_id','=','sanphams.id')
+        ->select('sanphams.Anh as Anh', 'sanphams.TenSanPham as TenSanPham', 'sanphams.GiaBan as GiaBan', 'chitietgiohangs.SL as SL')
+        ->addSelect(DB::raw('sanphams.GiaBan*chitietgiohangs.SL as Total'))->get();
         return view('user.cart.index', ['data' => $data]);
     }
     public function productdetail($sp)

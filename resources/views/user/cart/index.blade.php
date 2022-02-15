@@ -32,13 +32,13 @@
                             <h4><a href="">{{ $item->TenSanPham }}</a></h4>
                         </td>
                         <td >
-                            <h4 >{{ $item->GiaBan }} VND</h4>
+                            <h4 >{{number_format($item->GiaBan) }} VND</h4>
                         </td>
                         <td >
                             <input type="number" name="quantity" value="{{ $item->SL }}" min="1" max="50">
                         </td>
                         <td>
-                            <p class="cart_total_price">{{ $item->Total }} VND</p>
+                            <p class="cart_total_price">{{number_format($item->Total) }} VND</p>
                         </td>
                         <td>
                             <button type="button" class="btn btn-warning">Cập nhật</button>
