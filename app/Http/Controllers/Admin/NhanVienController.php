@@ -21,7 +21,7 @@ class NhanvienController extends Controller
     {
         $email = Cookie::get('email');
         $value = DB::table('nhanviens')->where('email','=',$email)->get();
-        $data = DB::table('nhanviens')->paginate(2);
+        $data = DB::table('nhanviens')->paginate(4);
         return view('admin.nhanvien.index', ['data' => $data, 'value' => $value]);
     }
 
@@ -115,13 +115,12 @@ class NhanvienController extends Controller
             $image = $request->file('Anh');
             $image->move('backend/img/AnhNhanVien', $Anh);
         }
-        $data['password'] = Hash::make($request->password);
         $data->update([
             'MaNV' => $data->MaNV,
             'LoaiNV' => $request->LoaiNV,
             'HoTen' => $request->HoTen,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
             'Anh'=> $data['Anh']
         ]);
         return redirect()->route('admin.nhanvien')->with('success', 'Sửa thành công!');
