@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $data = DB::table('sanphams')->get();
-        return view('user.layouts',['data' =>$data]);
+        return view('user.home.index',['data' =>$data]);
     }
     public function cart()
     {

@@ -1,8 +1,5 @@
 @extends('user.layouts')
 @section('title') Home | E-Shopper @endsection
-@php
-    $data = App\Models\sanpham::all()
-@endphp
 @section('content')
     <section id="slider"><!--slider-->
         <div class="container">
