@@ -30,18 +30,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Request $request)
     {
-
         Paginator::useBootStrap();
         Schema::defaultStringLength(191);
-
-        $email = Cookie::get('email');
-        $value = DB::select('select * from nhanviens where email = ?', [$email]);
-        if ($request->datedtstart == $request->datedtend) {
-            $doanhthu  = DB::select('select sum(hoadonbans.TongTien) as dt from hoadonbans where DATE(NgLap) LIKE ?', [$request->datedtstart]);
-        } else {
-            $doanhthu  = DB::select('select sum(hoadonbans.TongTien) as dt from hoadonbans where DATE(NgLap) >= ? and DATE(NgLap) <= ?', [$request->datedtstart, $request->datedtend]);
-        }
-
-        view()->share('value', $value);
     }
 }

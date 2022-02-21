@@ -5,7 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use App\Models\nhanvien;
-use App\Models\hoadonban;
+use App\Models\khachhang;
+use App\Models\chitiethoadonnhap;
 use App\Models\user;
 
 class AdminsTableSeeder extends Seeder
@@ -59,37 +60,14 @@ class AdminsTableSeeder extends Seeder
                 'Anh' => '1.jpg',
             ]
         );
-        //Thêm mới
-        hoadonnhap::create(
+        khachhang::create(
             [
-                'MaHD' => 'HD1',
-                'NgNhap' => '25/05/2001',
-                'TongTien' => '1000000',
-            ],
-        );
-
-        hoadonnhap::create(
-            [
-                'MaHD' => 'HD2',
-                'NgNhap' => '25/05/2001',
-                'TongTien' => '1200000',
-            ],
-        );
-
-        //Thêm mới
-        chitiethoadonnhap::create(
-            [
-                'MaSanPham' => 'SP1',
-                'SL' => '10',
-                'DonGia' => '10000000',
-            ],
-        );
-        chitiethoadonnhap::create(
-            [
-                'MaSanPham' => 'SP2',
-                'SL' => '10',
-                'DonGia' => '10000000',
-            ],
+                'MaKH' => 'KH1',
+                'TenKH' => 'Minh Hiếu',
+                'DChi' => 'Long an',
+                'SDT' => '0373090347',
+                'password' => bcrypt('1')
+            ]
         );
     }
 }

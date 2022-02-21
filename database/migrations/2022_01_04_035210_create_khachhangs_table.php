@@ -19,7 +19,7 @@ class CreateKhachhangsTable extends Migration
             $table->string('TenKH');
             $table->string('DChi');
             $table->string('SDT');
-            $table->string('MatKhau');
+            $table->string('password');
             $table->timestamps();
         });
     }

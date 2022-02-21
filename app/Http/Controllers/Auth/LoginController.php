@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cookie;
 
 class LoginController extends Controller
 {
@@ -26,7 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/user';
 
     /**
      * Create a new controller instance.
@@ -35,6 +39,36 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest:user')->except('logout');
+    }
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+    public function index()
+    {
+        return view('user.home.index');
+    }
+    public function login(Request $request)
+    {
+        if (Auth::guard('user')->attempt([
+            'SDT' => $request->sdt,
+            'password' => $request->password
+
+        ], $request->get('remember'))) {
+            Cookie::queue('SDT', $request->sdt, 86400);
+            return redirect()->intended(route('home'));
+            dd($request->password);
+        }
+        return back()->withInput($request->only('SDT', 'remember'));
+    }
+    public function logout(Request $request)
+    {
+        Auth::guard('user')->logout();
+        $request->session()->invalidate();
+        return redirect()->route('user.login');
     }
 }

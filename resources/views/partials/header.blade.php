@@ -40,7 +40,8 @@
                         <ul class="nav navbar-nav">
                             <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
                             <li><a href="{{ route('cart') }}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                            <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+                            <li><a href="{{ route('user.login') }}"><i class="fa fa-lock"></i> Login</a></li>
+                            <li><a href="{{ route('user.logout') }}"><i class="fa fa-lock"></i> Logout</a></li>
                         </ul>
                     </div>
                 </div>

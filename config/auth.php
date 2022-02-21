@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'nhanviens',
         ],
+        'user' => [
+            'driver' => 'session',
+            'provider' => 'khachhangs',
+        ],
     ],
 
     /*
@@ -71,6 +75,10 @@ return [
         'nhanviens' => [
             'driver' => 'eloquent',
             'model' => App\Models\nhanvien::class,
+        ],
+        'khachhangs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\khachhang::class,
         ],
 
         // 'users' => [
@@ -102,6 +110,12 @@ return [
             'throttle' => 60,
         ],
         'nhanviens' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'khachhangs' => [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
