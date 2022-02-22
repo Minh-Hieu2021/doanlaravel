@@ -21,7 +21,7 @@
                                         <img src="{{ $sp->Anh }}" alt="" />
                                         <h2>{{ number_format($sp->GiaBan) }} VND</h2>
                                         <p>{{ $sp->TenSanPham }}</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        <a href="{{ route('addCart',['sp'=>$sp->id]) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </div>
                                     <div class="product-overlay">
                                         <div class="overlay-content">

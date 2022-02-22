@@ -27,12 +27,14 @@
                             <img src="images/product-details/rating.png" alt="" />
                             <span>
                                 <span>{{ number_format($sp->GiaBan) }} VND</span>
-                                <label>Quantity:</label>
-                                <input type="text" value="1" />
-                                <button type="button" class="btn btn-fefault cart">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    Add to cart
-                                </button>
+                                <form action="{{ route('addCartQuantity',['sp'=>$sp->id]) }}" method="post" enctype="multipart/form"><label>Quantity:</label>
+                                    @csrf
+                                    <input name="quantity" type="text" value="1" />
+                                    <button type="submit" class="btn btn-fefault cart">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        Add to cart
+                                    </button></form>
+
                             </span>
                             <p><b>Availability:</b> In Stock</p>
                             <p><b>Condition:</b> New</p>

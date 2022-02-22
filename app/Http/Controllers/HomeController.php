@@ -7,7 +7,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\sanpham;
 use App\Models\chitietgiohang;
+use App\Models\hoadonban;
+use App\Models\chitiethoadonban;
 use Illuminate\Support\Facades\Cookie;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -55,6 +58,87 @@ class HomeController extends Controller
         if ($sl == null) {
             $sl = 1;
         }
+        $sdt = Cookie::get('SDT');
+        $idkh = DB::table('khachhangs')->where('SDT', '=', $sdt)->select('id')->first();
+        $idgh = DB::table('giohangs')->where('KhachHang_id', '=', $idkh->id)->select('id')->first();
+        if ($idgh == null) {
+            $giohang = [
+                'KhachHang_id' => $idkh->id
+            ];
+            giohang::create($giohang);
+            $idgh = DB::table('giohangs')->where('KhachHang_id', '=', $idkh->id)->select('id')->first();
+        }
+        $SanPham_id = DB::table('chitietgiohangs')->where('SanPham_id', '=', $sp)->first();
+        if ($SanPham_id == null) {
+            $chitietgiohang = [
+                'GioHang_id' => $idgh->id,
+                'SanPham_id' => $sp,
+                'SL' => $sl,
+            ];
+            chitietgiohang::create($chitietgiohang);
+        } else {
+            $chitietgiohang = chitietgiohang::findOrFail($SanPham_id->id);
+            $chitietgiohang->update([
+                'GioHang_id' => $SanPham_id->GioHang_id,
+                'SanPham_id' => $SanPham_id->SanPham_id,
+                'SL' => $SanPham_id->SL + $sl,
+            ]);
+        }
+
+
+        return redirect()->route('cart');
+    }
+
+    public function showformnhapthongtinhoadon($sp, $sl = null)
+    {
+        return view('user.invoice.index');
+    }
+    public function addInvoice(Request $request)
+    {
+        $DChi = $request->DChi;
+        $SDTgiao = $request->SDT;
+        $sdt = Cookie::get('SDT');
+        $idkh = DB::table('khachhangs')->where('SDT', '=', $sdt)->select('id')->first();
+        $idgh = DB::table('giohangs')->where('KhachHang_id', '=', $idkh->id)->select('id')->first();
+        $chitietgiohang = DB::table('chitietgiohangs')->where('GioHang_id', '=', $idgh->id)->get();
+        $date = Carbon::now();
+        $tongtien = 0;
+        foreach ($chitietgiohang as $item) {
+            $dongia = DB::table('sanphams')->where('id', '=', $item->SanPham_id)->select('GiaBan')->first();
+            $tongtien += $item->SL * $dongia->GiaBan;
+        }
+        $mahd = 'HD' . $idkh->id . $date;
+        $hoadonban = [
+            'Khachhang_id' => $idkh->id,
+            'MaHD' => $mahd,
+            'NgLap' => $date,
+            'TongTien' => $tongtien,
+            'TrangThai' => 0,
+            'DChi' => $DChi,
+            'SDT' => $SDTgiao
+
+        ];
+        hoadonban::create($hoadonban);
+        $hoadonbanid = DB::table('hoadonbans')->where('MaHD', '=', $mahd)->select('id')->first();
+        foreach ($chitietgiohang as $item) {
+            $dongia = DB::table('sanphams')->where('id', '=', $item->SanPham_id)->select('GiaBan')->first();
+            $chitiethoadonban = [
+                'SanPham_id' => $item->SanPham_id,
+                'HoaDonBan_id' => $hoadonbanid->id,
+                'SL' => $item->SL,
+                'GiaBan' => $dongia->GiaBan
+            ];
+            chitiethoadonban::create($chitiethoadonban);
+            $chitietgiohang = chitietgiohang::findOrFail($item->id);
+            $chitietgiohang->delete();
+        }
+        $giohang = giohang::findOrFail($idgh->id);
+        $giohang->delete();
+        return redirect()->route('home');
+    }
+    public function addCartQuantity(Request $request, $sp)
+    {
+        $sl = $request->quantity;
         $sdt = Cookie::get('SDT');
         $idkh = DB::table('khachhangs')->where('SDT', '=', $sdt)->select('id')->first();
         $idgh = DB::table('giohangs')->where('KhachHang_id', '=', $idkh->id)->select('id')->first();

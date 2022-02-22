@@ -26,6 +26,9 @@ Route::group(['prefix' => '/cart'], function () {
     Route::group(['middleware' => ['auth:user']], function () {
         Route::get('/', [HomeController::class, 'cart'])->name('cart');
         Route::get('/addCart/{sp}/{sl?}', [HomeController::class, 'addCart'])->name('addCart');
+        Route::post('/addCartQuantity/{sp}', [HomeController::class, 'addCartQuantity'])->name('addCartQuantity');
+        Route::post('/addInvoice', [HomeController::class, 'addInvoice'])->name('addInvoice');
+        Route::get('/showformnhapthongtinhoadon', [HomeController::class, 'showformnhapthongtinhoadon'])->name('showformnhapthongtinhoadon');
     });
 });
 

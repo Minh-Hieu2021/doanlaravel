@@ -50,7 +50,7 @@
             </table>
         </div>
        <div style= "padding-bottom: 20px;text-align: center">
-        <button type="button" class="btn btn-warning">Mua hàng</button>
+        <a href="{{ route('showformnhapthongtinhoadon') }}"><button type="button" class="btn btn-warning">Mua hàng</button></a>
        </div>
     </div>
 </section>
