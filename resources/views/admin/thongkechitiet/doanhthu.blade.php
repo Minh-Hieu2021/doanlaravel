@@ -11,7 +11,7 @@
             <button class="btn btn-primary" type="submit">Tìm kiếm</button>
             </form><br>
             <h5>Doanh thu trong khoảng thời gian trên là: @foreach ($doanhthu as  $item)
-                {{ $item->dt }}
+                {{ number_format($item->dt) }}
             @endforeach VND</h5><br>
     </div>
   </main>

@@ -57,14 +57,14 @@
                 <td>{{ $item->MaHD }}</td>
                 <td>{{ $item->TenKH }}</td>
                 <td>{{ $item->NgLap }}</td>
-                <td>{{ $item->TongTien }} VND</td>
+                <td>{{ number_format($item->TongTien) }} VND</td>
                 @if ($item->TrangThai == 1)
                 <td><button class="btn btn-success">True</button></td>
                 @else
                 <td><button class="btn btn-danger">False</button></td>
                 @endif
-                <td>{{ $item->SDT }}</td>
-                <td>{{ $item->DChi }}</td>
+                <td>{{ $item->SDTgiao }}</td>
+                <td>{{ $item->DChigiao }}</td>
             </tr>
             @endforeach
 
@@ -82,7 +82,7 @@
             <tr>
                 <td>{{ $item->MaKH }}</td>
                 <td>{{ $item->TenKH }}</td>
-                <td>{{ $item->Tiendachi }} VND</td>
+                <td>{{ number_format($item->Tiendachi) }} VND</td>
             </tr>
             @endforeach
 
@@ -90,7 +90,7 @@
     </div><br>
     <div>
         <h5>Doanh thu tuần hiện tại: @foreach ($doanhthu as  $item)
-            {{ $item->dt }}
+            {{ number_format($item->dt) }}
         @endforeach VND</h5><br>
     </div><br>
   </main>

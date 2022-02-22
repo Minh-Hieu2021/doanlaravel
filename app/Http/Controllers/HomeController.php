@@ -31,7 +31,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = DB::table('sanphams')->get();
+        // $data = DB::table('sanphams')->get();
+        $data = DB::select('select sanphams.GiaBan, sanphams.Anh, sanphams.id, sanphams.MaSanPham, sanphams.TenSanPham,  SUM(chitiethoadonbans.SL) as TongSL
+        from chitiethoadonbans inner JOIN sanphams on chitiethoadonbans.SanPham_id = sanphams.id
+        GROUP by sanphams.id,sanphams.MaSanPham, sanphams.TenSanPham,sanphams.Anh,sanphams.GiaBan
+        ORDER BY TongSL DESC
+        LIMIT 0, ?', [3]);
         return view('user.home.index', ['data' => $data]);
     }
     public function cart()
@@ -42,7 +47,7 @@ class HomeController extends Controller
         $data = DB::table('giohangs')->where('KhachHang_id', '=', $idkh->id)
             ->join('chitietgiohangs', 'giohangs.id', '=', 'chitietgiohangs.GioHang_id')
             ->join('sanphams', 'chitietgiohangs.SanPham_id', '=', 'sanphams.id')
-            ->select('sanphams.Anh as Anh', 'sanphams.TenSanPham as TenSanPham', 'sanphams.GiaBan as GiaBan', 'chitietgiohangs.SL as SL')
+            ->select('chitietgiohangs.id as id', 'sanphams.Anh as Anh', 'sanphams.TenSanPham as TenSanPham', 'sanphams.GiaBan as GiaBan', 'chitietgiohangs.SL as SL')
             ->addSelect(DB::raw('sanphams.GiaBan*chitietgiohangs.SL as Total'))->get();
         return view('user.cart.index', ['data' => $data]);
     }
@@ -95,6 +100,10 @@ class HomeController extends Controller
     }
     public function addInvoice(Request $request)
     {
+        $this->validate($request, [
+            'DChi' => 'required',
+            'SDT' => 'required'
+        ]);
         $DChi = $request->DChi;
         $SDTgiao = $request->SDT;
         $sdt = Cookie::get('SDT');
@@ -167,6 +176,24 @@ class HomeController extends Controller
         }
 
 
+        return redirect()->route('cart');
+    }
+    public function updateQuantity(Request $request, $id)
+    {
+        $quantity = $request->quantity;
+        $chitietgiohang = chitietgiohang::findOrFail($id);
+        $chitietgiohang->update([
+            'GioHang_id' => $chitietgiohang->GioHang_id,
+            'SanPham_id' => $chitietgiohang->SanPham_id,
+            'SL' => $quantity
+        ]);
+
+        return redirect()->route('cart');
+    }
+    public function deleteCart($id)
+    {
+        $chitietgiohang = chitietgiohang::findOrFail($id);
+        $chitietgiohang->delete();
         return redirect()->route('cart');
     }
 }

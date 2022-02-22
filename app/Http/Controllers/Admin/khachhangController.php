@@ -32,7 +32,9 @@ class khachhangController extends Controller
      */
     public function create()
     {
-        return view('admin.khachhang.add');
+        $email = Cookie::get('email');
+        $value = DB::select('select * from nhanviens where email = ?', [$email]);
+        return view('admin.khachhang.add', ['value' => $value]);
     }
 
     /**
@@ -52,7 +54,7 @@ class khachhangController extends Controller
             'SDT' => 'required',
             'MatKhau' => 'required',
         ]);
-        DB::insert('insert into khachhangs (MaKH, TenKH, DChi, SDT, MatKhau ) values (?, ?, ?, ?, ?)', [$data['MaKH'], $data['TenKH'], $data['DChi'], $data['SDT'], $data['MatKhau']]);
+        DB::insert('insert into khachhangs (MaKH, TenKH, DChi, SDT, password ) values (?, ?, ?, ?, ?)', [$data['MaKH'], $data['TenKH'], $data['DChi'], $data['SDT'], $data['MatKhau']]);
 
 
         return redirect()->route('admin.khachhang')->with('success', 'Thêm thành công!');
@@ -77,8 +79,10 @@ class khachhangController extends Controller
      */
     public function edit($id)
     {
+        $email = Cookie::get('email');
+        $value = DB::select('select * from nhanviens where email = ?', [$email]);
         $khachhang = khachhang::findOrFail($id);
-        return view('admin.khachhang.edit', compact('khachhang'));
+        return view('admin.khachhang.edit', compact('khachhang'), ['value' => $value]);
     }
 
     /**
@@ -100,7 +104,7 @@ class khachhangController extends Controller
         ]);
         $data = $request->all();
 
-        DB::update('update khachhangs set MaNV = ?, LoaiNV = ?, HoTen = ?, email = ? , password = ?, Anh = ? where id = ?', [$nhanvien->MaNV, $data['LoaiNV'], $data['HoTen'], $data['email'], $data['password'], $data['Anh'], $id]);
+        DB::update('update khachhangs set MaKH = ?, TenKH = ?, Dchi = ?, SDT = ? , password = ? where id = ?', [$khachhang->MaKH, $data['TenKH'], $data['Dchi'], $data['SDT'], $data['MatKhau'], $id]);
         return redirect()->route('admin.khachhang')->with('success', 'Sửa thành công!');
     }
 

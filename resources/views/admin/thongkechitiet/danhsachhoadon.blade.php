@@ -30,8 +30,8 @@
                 @else
                 <td><button class="btn btn-danger">False</button></td>
                 @endif
-                <td>{{ $item->SDT }}</td>
-                <td>{{ $item->DChi }}</td>
+                <td>{{ $item->SDTgiao }}</td>
+                <td>{{ $item->DChigiao }}</td>
             </tr>
             @endforeach
         </table>

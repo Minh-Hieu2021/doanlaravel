@@ -20,7 +20,7 @@ class AdminController extends Controller
     {
         $email = Cookie::get('email');
         $value = DB::select('select * from nhanviens where email = ?', [$email]);
-        $listhd = DB::select('select *
+        $listhd = DB::select('select *, hoadonbans.SDT as SDTgiao, hoadonbans.DChi as DChigiao
                             from hoadonbans
                             inner join khachhangs on hoadonbans.khachhang_id = khachhangs.id
                             where NgLap >= ?', [Carbon::now()->startOfWeek()]);
@@ -91,7 +91,7 @@ class AdminController extends Controller
     {
         $email = Cookie::get('email');
         $value = DB::select('select * from nhanviens where email = ?', [$email]);
-        $listhd = DB::select('select *
+        $listhd = DB::select('select *, hoadonbans.SDT as SDTgiao, hoadonbans.DChi as DChigiao
         from hoadonbans
         inner join khachhangs on hoadonbans.khachhang_id = khachhangs.id
         where DATE(NgLap) >= ? and DATE(NgLap) <= ?

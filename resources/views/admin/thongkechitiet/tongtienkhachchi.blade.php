@@ -15,7 +15,7 @@
                 <td>{{ $item->MaKH }}</td>
                 <td>{{ $item->TenKH }}</td>
                 @if ($item->Tiendachi != null)
-                <td>{{ $item->Tiendachi }} VND</td>
+                <td>{{ number_format($item->Tiendachi) }} VND</td>
                 @else
                 <td>0 VND</td>
                 @endif

@@ -13,7 +13,7 @@
                 <div class="features_items"><!--features_items-->
                     <h2 class="title text-center">Features Items</h2>
                     @foreach ($data as $sp)
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <a href="{{ route('productdetail', $sp->MaSanPham) }}">
                             <div class="product-image-wrapper">
                                 <div class="single-products">

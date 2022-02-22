@@ -28,6 +28,8 @@ Route::group(['prefix' => '/cart'], function () {
         Route::get('/addCart/{sp}/{sl?}', [HomeController::class, 'addCart'])->name('addCart');
         Route::post('/addCartQuantity/{sp}', [HomeController::class, 'addCartQuantity'])->name('addCartQuantity');
         Route::post('/addInvoice', [HomeController::class, 'addInvoice'])->name('addInvoice');
+        Route::post('/updateQuantity/{id}', [HomeController::class, 'updateQuantity'])->name('updateQuantity');
+        Route::get('/deleteCart/{id}', [HomeController::class, 'deleteCart'])->name('deleteCart');
         Route::get('/showformnhapthongtinhoadon', [HomeController::class, 'showformnhapthongtinhoadon'])->name('showformnhapthongtinhoadon');
     });
 });

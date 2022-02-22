@@ -20,7 +20,7 @@ class NhanvienController extends Controller
     public function index()
     {
         $email = Cookie::get('email');
-        $value = DB::table('nhanviens')->where('email','=',$email)->get();
+        $value = DB::table('nhanviens')->where('email', '=', $email)->get();
         $data = DB::table('nhanviens')->paginate(4);
         return view('admin.nhanvien.index', ['data' => $data, 'value' => $value]);
     }
@@ -32,7 +32,9 @@ class NhanvienController extends Controller
      */
     public function create()
     {
-        return view('admin.nhanvien.add');
+        $email = Cookie::get('email');
+        $value = DB::table('nhanviens')->where('email', '=', $email)->get();
+        return view('admin.nhanvien.add', ['value' => $value]);
     }
 
     /**
@@ -87,8 +89,10 @@ class NhanvienController extends Controller
      */
     public function edit($id)
     {
+        $email = Cookie::get('email');
+        $value = DB::table('nhanviens')->where('email', '=', $email)->get();
         $nhanvien = nhanvien::findOrFail($id);
-        return view('admin.nhanvien.edit', compact('nhanvien'));
+        return view('admin.nhanvien.edit', compact('nhanvien'), ['value' => $value]);
     }
 
     /**
@@ -121,7 +125,7 @@ class NhanvienController extends Controller
             'HoTen' => $request->HoTen,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'Anh'=> $data['Anh']
+            'Anh' => $data['Anh']
         ]);
         return redirect()->route('admin.nhanvien')->with('success', 'Sửa thành công!');
     }

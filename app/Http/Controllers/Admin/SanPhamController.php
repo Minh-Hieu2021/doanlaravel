@@ -104,7 +104,6 @@ class SanPhamController extends Controller
             'TenSanPham' => 'required',
             'GiaBan' => 'required',
             'SLTK' => 'required',
-            'Anh' => 'required',
             'MoTa' => 'required',
 
         ]);

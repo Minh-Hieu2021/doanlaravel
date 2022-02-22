@@ -24,6 +24,8 @@
                 </thead>
                 <tbody>
                     @foreach ($data as $item)
+                   <form action="{{ route('updateQuantity',['id' => $item->id]) }}" method="post" enctype="multipart/form-data">
+                       @csrf
                     <tr >
                         <td >
                             <a href=""><img style="width: 80px;" src= "{{ asset($item->Anh)}}" alt=""></a>
@@ -41,10 +43,11 @@
                             <p class="cart_total_price">{{number_format($item->Total) }} VND</p>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-warning">Cập nhật</button>
-                            <button type="button" class="btn btn-warning">Xóa</button>
+                            <button type="submit" class="btn btn-warning">Cập nhật</button>
+                            <a href="{{ route('deleteCart',['id' => $item->id]) }}"><button type="button" class="btn btn-warning">Xóa</button></a>
                         </td>
                     </tr>
+                   </form>
                     @endforeach
                 </tbody>
             </table>
