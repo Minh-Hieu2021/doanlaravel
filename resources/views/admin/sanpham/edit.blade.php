@@ -36,13 +36,13 @@
               value="{{$sanpham->MoTa}}">
           </div>
           <div class="form-group ">
-            <label class="text-uppercase font-weight-bold" for="Anh">Ảnh nhân viên:</label>
+            <label class="text-uppercase font-weight-bold" for="Anh">Ảnh sản phẩm:</label>
             <input type="file" class="form-control rounded-0" id="Anh" placeholder="Anh" name="Anh">
           </div>
 
           <div class="form-group ">
             <button type="submit" class="btn btn-warning text-uppercase rounded-0 font-weight-bold">
-              Lưu nhân viên
+              Lưu sản phẩm
             </button>
           </div>
         </form>

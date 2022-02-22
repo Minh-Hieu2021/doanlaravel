@@ -31,7 +31,7 @@
           </div>
 
           <div class="form-group ">
-            <label class="text-uppercase font-weight-bold" for="Anh">Ảnh nhân viên:</label>
+            <label class="text-uppercase font-weight-bold" for="Anh">Ảnh sản phẩm:</label>
             <input type="file" class="form-control rounded-0" id="Anh" placeholder="Anh" name="Anh">
           </div>
 

@@ -32,7 +32,9 @@ class SanPhamController extends Controller
      */
     public function create()
     {
-        return view('admin.sanpham.add');
+        $email = Cookie::get('email');
+        $value = DB::select('select * from nhanviens where email = ?', [$email]);
+        return view('admin.sanpham.add', ['value' => $value]);
     }
 
     /**
@@ -80,8 +82,11 @@ class SanPhamController extends Controller
      */
     public function edit($id)
     {
+
+        $email = Cookie::get('email');
+        $value = DB::select('select * from nhanviens where email = ?', [$email]);
         $sanpham = sanpham::findOrFail($id);
-        return view('admin.sanpham.edit', compact('sanpham'));
+        return view('admin.sanpham.edit', compact('sanpham'), ['value' => $value]);
     }
 
     /**
@@ -113,7 +118,7 @@ class SanPhamController extends Controller
             $image = $request->file('Anh');
             $data['Anh'] = $image->move('backend/img/AnhSanpham', $Anh);
         }
-        DB::update('update sanphams set MaSanPham = ?, TenSanPham = ?, GiaBan = ?, SLTK = ? ,MoTa = ?, Anh = ? where id = ?', [$data['MaSanPham'], $data['TenSanPham'], $data['GiaBan'], $data['SLTK'], $data['MoTa'],$data['Anh'], $id]);
+        DB::update('update sanphams set MaSanPham = ?, TenSanPham = ?, GiaBan = ?, SLTK = ? ,MoTa = ?, Anh = ? where id = ?', [$data['MaSanPham'], $data['TenSanPham'], $data['GiaBan'], $data['SLTK'], $data['MoTa'], $data['Anh'], $id]);
         return redirect()->route('admin.sanpham')->with('success', 'Sửa thành công!');
     }
 

@@ -25,9 +25,10 @@ Route::group(['prefix' => '/cart'], function () {
     Route::get('logout', [LoginController::class, 'logout'])->name('user.logout');
     Route::group(['middleware' => ['auth:user']], function () {
         Route::get('/', [HomeController::class, 'cart'])->name('cart');
+        Route::get('/addCart/{sp}/{sl?}', [HomeController::class, 'addCart'])->name('addCart');
     });
 });
-Route::post('/addCart/{sp}/{sl}', [HomeController::class, 'addCart'])->name('addCart');
+
 Route::get('/productdetail', function () {
     return view('user.home.productdetail');
 });

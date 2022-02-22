@@ -33,9 +33,10 @@ class HomeController extends Controller
     }
     public function cart()
     {
-        // $this->middleware('auth');
         $total = 0;
-        $data = DB::table('giohangs')
+        $sdt = Cookie::get('SDT');
+        $idkh = DB::table('khachhangs')->where('SDT', '=', $sdt)->select('id')->first();
+        $data = DB::table('giohangs')->where('KhachHang_id', '=', $idkh->id)
             ->join('chitietgiohangs', 'giohangs.id', '=', 'chitietgiohangs.GioHang_id')
             ->join('sanphams', 'chitietgiohangs.SanPham_id', '=', 'sanphams.id')
             ->select('sanphams.Anh as Anh', 'sanphams.TenSanPham as TenSanPham', 'sanphams.GiaBan as GiaBan', 'chitietgiohangs.SL as SL')
@@ -49,27 +50,39 @@ class HomeController extends Controller
             return view('user.home.productdetail', compact('data'));
         }
     }
-    public function addCart($sp, $sl)
+    public function addCart($sp, $sl = null)
     {
         if ($sl == null) {
             $sl = 1;
         }
-        // $sdt = Cookie::get('SDT');
-        // $idkh = DB::table('khachhangs')->where('SDT', '=', $sdt)->select('id')->get();
-        $idkh = 1;
-        if (DB::table('giohangs')->where('KhachHang_id', '=', $idkh)->get() == null) {
-            $data = [
-                'KhachHang_id' => $idkh,
+        $sdt = Cookie::get('SDT');
+        $idkh = DB::table('khachhangs')->where('SDT', '=', $sdt)->select('id')->first();
+        $idgh = DB::table('giohangs')->where('KhachHang_id', '=', $idkh->id)->select('id')->first();
+        if ($idgh == null) {
+            $giohang = [
+                'KhachHang_id' => $idkh->id
             ];
-            giohang::create($data);
+            giohang::create($giohang);
+            $idgh = DB::table('giohangs')->where('KhachHang_id', '=', $idkh->id)->select('id')->first();
         }
-        $idgh = DB::table('giohangs')->where('KhachHang_id', '=', $idkh)->select('id')->get();
-        $chitietgiohang = [
-            'GioHang_id' => $idgh,
-            'SanPham_id' => $sp,
-            'SL' => $sl,
-        ];
-        chitietgiohang::create($chitietgiohang);
-        return 's';
+        $SanPham_id = DB::table('chitietgiohangs')->where('SanPham_id', '=', $sp)->first();
+        if ($SanPham_id == null) {
+            $chitietgiohang = [
+                'GioHang_id' => $idgh->id,
+                'SanPham_id' => $sp,
+                'SL' => $sl,
+            ];
+            chitietgiohang::create($chitietgiohang);
+        } else {
+            $chitietgiohang = chitietgiohang::findOrFail($SanPham_id->id);
+            $chitietgiohang->update([
+                'GioHang_id' => $SanPham_id->GioHang_id,
+                'SanPham_id' => $SanPham_id->SanPham_id,
+                'SL' => $SanPham_id->SL + $sl,
+            ]);
+        }
+
+
+        return redirect()->route('cart');
     }
 }
