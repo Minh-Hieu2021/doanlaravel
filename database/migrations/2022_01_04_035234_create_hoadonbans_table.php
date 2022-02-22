@@ -16,7 +16,6 @@ class CreateHoadonbansTable extends Migration
         Schema::create('hoadonbans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('Khachhang_id')->constrained('khachhangs');
-            $table->foreignId('NhanVien_id')->constrained('nhanviens');
             $table->string('MaHD');
             $table->datetime('NgLap');
             $table->integer('TongTien');

@@ -69,5 +69,14 @@ class AdminsTableSeeder extends Seeder
                 'password' => bcrypt('1')
             ]
         );
+        khachhang::create(
+            [
+                'MaKH' => 'KH2',
+                'TenKH' => 'Đức',
+                'DChi' => 'Long an',
+                'SDT' => '1',
+                'password' => bcrypt('1')
+            ]
+        );
     }
 }

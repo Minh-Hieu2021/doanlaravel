@@ -23,7 +23,6 @@ class AdminController extends Controller
         $listhd = DB::select('select *
                             from hoadonbans
                             inner join khachhangs on hoadonbans.khachhang_id = khachhangs.id
-                            inner join nhanviens on hoadonbans.nhanvien_id = nhanviens.id
                             where NgLap >= ?', [Carbon::now()->startOfWeek()]);
         $listtienkhchi = DB::select('select khachhangs.id, khachhangs.MaKH as MaKH, khachhangs.TenKH as TenKH, sum(hoadonbans.TongTien) as Tiendachi
                                     from hoadonbans inner join khachhangs on hoadonbans.khachhang_id = khachhangs.id
@@ -95,7 +94,6 @@ class AdminController extends Controller
         $listhd = DB::select('select *
         from hoadonbans
         inner join khachhangs on hoadonbans.khachhang_id = khachhangs.id
-        inner join nhanviens on hoadonbans.nhanvien_id = nhanviens.id
         where DATE(NgLap) >= ? and DATE(NgLap) <= ?
         ORDER BY NgLap ASC', [$request->datehdstart, $request->datehdend]);
         return view('admin.thongkechitiet.danhsachhoadon', ['listhd' => $listhd, 'value' => $value]);

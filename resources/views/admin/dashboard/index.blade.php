@@ -45,7 +45,6 @@
         <table class="table table-striped">
             <tr>
                 <th>Mã hóa đơn</th>
-                <th>Nhân viên</th>
                 <th>Khách hàng</th>
                 <th>Ngày lập</th>
                 <th>Tổng tiền</th>
@@ -56,7 +55,6 @@
             @foreach ($listhd as $item)
             <tr>
                 <td>{{ $item->MaHD }}</td>
-                <td>{{ $item->HoTen }}</td>
                 <td>{{ $item->TenKH }}</td>
                 <td>{{ $item->NgLap }}</td>
                 <td>{{ $item->TongTien }} VND</td>
