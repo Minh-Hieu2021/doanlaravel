@@ -31,12 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $data = DB::table('sanphams')->get();
-        $data = DB::select('select sanphams.GiaBan, sanphams.Anh, sanphams.id, sanphams.MaSanPham, sanphams.TenSanPham,  SUM(chitiethoadonbans.SL) as TongSL
-        from chitiethoadonbans inner JOIN sanphams on chitiethoadonbans.SanPham_id = sanphams.id
-        GROUP by sanphams.id,sanphams.MaSanPham, sanphams.TenSanPham,sanphams.Anh,sanphams.GiaBan
-        ORDER BY TongSL DESC
-        LIMIT 0, ?', [3]);
+        $data = DB::table('sanphams')->get();
         return view('user.home.index', ['data' => $data]);
     }
     public function cart()

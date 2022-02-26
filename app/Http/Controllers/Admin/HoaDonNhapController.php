@@ -32,7 +32,9 @@ class HoaDonNhapController extends Controller
      */
     public function create()
     {
-        return view('admin.hoadonnhap.add');
+        $email = Cookie::get('email');
+        $value = DB::select('select * from nhanviens where email = ?', [$email]);
+        return view('admin.hoadonnhap.add', ['value' => $value]);
     }
 
     /**
@@ -75,8 +77,10 @@ class HoaDonNhapController extends Controller
      */
     public function edit($id)
     {
+        $email = Cookie::get('email');
+        $value = DB::select('select * from nhanviens where email = ?', [$email]);
         $hoadonnhap = hoadonnhap::findOrFail($id);
-        return view('admin.hoadonnhap.edit', compact('hoadonnhap'));
+        return view('admin.hoadonnhap.edit', compact('hoadonnhap'), ['value' => $value]);
     }
 
     /**
